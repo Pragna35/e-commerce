@@ -28,7 +28,10 @@ export const CartProvider = ({ children }) => {
             : item
         );
       } else {
-        return [...prevCart, { ...product, quantity: 1 }];
+        return [
+          ...prevCart,
+          { ...product, cartQuantity: 1, availableStock: product.quantity },
+        ];
       }
     });
   };
@@ -43,15 +46,15 @@ export const CartProvider = ({ children }) => {
     setCart([]);
   };
 
-  const incrementQuantity = (id) => {
+  const incrementQuantity = (id, availableStock) => {
     setCart((prevCart) =>
       prevCart.map((item) => {
         if (item.id === id) {
-          if (item.quantity + 1 > item.quantity) {
-            alert(`Only ${item.quantity} items available in stock!`);
-            return item;
+          if (item.quantity < availableStock) {
+            return { ...item, quantity: item.quantity + 1 };
           }
-          return { ...item, quantity: item.quantity + 1 };
+          alert(`Only ${availableStock} items available in stock!`);
+          return item;
         }
         return item;
       })

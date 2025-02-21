@@ -1,66 +1,32 @@
 import "../styles/sidebar.css";
 
-const SideBar = () => {
+const filterOptions = {
+  colors: ["Black", "Blue", "Red", "Green"],
+  genders: ["Men", "Women"],
+  prices: ["Under 250", "251-350", "351-450", "451-500", "Above 500"],
+  types: ["Polo", "Hoodie", "Basic"],
+};
+
+const SideBar = ({ handleFilterChange }) => {
   return (
     <>
       <div className="sidebar-conntainer">
-        <div className="filter-section">
-          <h3 className="filter-title">Color</h3>
-          <label>
-            <input type="checkbox" /> Black
-          </label>
-          <label>
-            <input type="checkbox" /> Blue
-          </label>
-          <label>
-            <input type="checkbox" /> Red
-          </label>
-          <label>
-            <input type="checkbox" /> Green
-          </label>
-        </div>
-
-        <div className="filter-section">
-          <h3 className="filter-title">Gender</h3>
-          <label>
-            <input type="checkbox" /> Men
-          </label>
-          <label>
-            <input type="checkbox" /> Women
-          </label>
-        </div>
-
-        <div className="filter-section">
-          <h3 className="filter-title">Price</h3>
-          <label>
-            <input type="checkbox" /> Under ₹250
-          </label>
-          <label>
-            <input type="checkbox" /> ₹251 - ₹350
-          </label>
-          <label>
-            <input type="checkbox" /> ₹351 - ₹450
-          </label>
-          <label>
-            <input type="checkbox" /> ₹451 - ₹500
-          </label>
-          <label>
-            <input type="checkbox" /> Above ₹500
-          </label>
-        </div>
-
-        <div className="filter-section">
-          <h3 className="filter-title">Type</h3>
-          <label>
-            <input type="checkbox" /> Polo
-          </label>
-          <label>
-            <input type="checkbox" /> Hoodie
-          </label>
-          <label>
-            <input type="checkbox" /> Basic
-          </label>
-        </div>
+        {Object.entries(filterOptions).map(([category, options], ind) => (
+          <div className="filter-section" key={ind}>
+            <h3 className="filter-title">
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </h3>
+            {options.map((option, index) => (
+              <label key={index}>
+                <input
+                  type="checkbox"
+                  onChange={() => handleFilterChange(category, option)}
+                />
+                {option}
+              </label>
+            ))}
+          </div>
+        ))}
       </div>
     </>
   );

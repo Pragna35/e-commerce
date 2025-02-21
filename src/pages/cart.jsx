@@ -31,6 +31,7 @@ const Cart = () => {
         </div>
         {cart.length > 0 ? (
           cart.map((item, ind) => {
+            console.log(item.availableStock);
             return (
               <div key={ind}>
                 <div className="cart-div ">
@@ -50,7 +51,9 @@ const Cart = () => {
                   <div className="quantity-div  ">
                     <div
                       className="increment-btn "
-                      onClick={() => incrementQuantity(item.id)}
+                      onClick={() =>
+                        incrementQuantity(item.id, item.availableStock)
+                      }
                     >
                       <span>+</span>
                     </div>
