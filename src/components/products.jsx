@@ -5,7 +5,7 @@ import SideBar from "./sideBar";
 
 import '../styles/products.css'
 
-const Products = ({products}) => {
+const Products = ({products, searchNotFound}) => {
  
 
 
@@ -14,7 +14,7 @@ const Products = ({products}) => {
     <div className="products-container">
    <SideBar/>
 
-  <ProductCard products = {products}/>
+  <ProductCard products = {products} searchNotFound={searchNotFound}/>
     
    
     </div>

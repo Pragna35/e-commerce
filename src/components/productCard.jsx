@@ -2,13 +2,19 @@ import { useContext } from "react";
 import "../styles/productCard.css";
 import { CartContext } from "../context/cartContext";
 
-const ProductCard = ({ products }) => {
+const ProductCard = ({ products, searchNotFound }) => {
   const { addToCart } = useContext(CartContext);
 
   return (
     <div className="disply-container">
       <div className="display-products">
-        {products &&
+        {searchNotFound ? (
+          <div className="no-result">
+             <h1 className="no-search">No items found</h1>
+          </div>
+         
+        ) : (
+          products &&
           products.map((item, ind) => {
             return (
               <div className="product-card " key={ind}>
@@ -30,7 +36,8 @@ const ProductCard = ({ products }) => {
                 </div>
               </div>
             );
-          })}
+          })
+        )}
       </div>
     </div>
   );

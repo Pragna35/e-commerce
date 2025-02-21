@@ -8,6 +8,7 @@ import axios from "axios";
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchNotFound, setSearchNotFound] = useState(false);
 
   useEffect(() => {
     axios
@@ -30,8 +31,9 @@ const HomePage = () => {
         <SearchBar
           products={products}
           setFilteredProducts={setFilteredProducts}
+          setSearchNotFound = {setSearchNotFound}
         />
-        <Products products={filteredProducts} />
+        <Products products={filteredProducts} searchNotFound={searchNotFound}/>
       </div>
     </>
   );

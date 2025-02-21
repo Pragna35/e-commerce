@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import "../styles/searchbar.css";
 
-const SearchBar = ({ products, setFilteredProducts }) => {
+const SearchBar = ({ products, setFilteredProducts, setSearchNotFound }) => {
   const [priceFilter, setPriceFilter] = useState("");
   const [searchText, setSearchText] = useState("");
-
 
   //search bar filtering
   const handleSearch = (e) => {
@@ -13,16 +12,17 @@ const SearchBar = ({ products, setFilteredProducts }) => {
 
     if (!value) {
       setFilteredProducts(products);
+      setSearchNotFound(false);
     } else {
-      const filtered = products.filter((product) =>   
+      const filtered = products.filter((product) =>
         `${product.name} ${product.color} ${product.type}`
           .toLowerCase()
           .includes(searchText)
       );
       setFilteredProducts(filtered);
+      setSearchNotFound(filtered.length === 0);
     }
   };
-
 
   //price filtering
   const handlePriceFilter = (e) => {
