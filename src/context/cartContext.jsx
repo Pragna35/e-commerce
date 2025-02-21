@@ -30,7 +30,7 @@ export const CartProvider = ({ children }) => {
       } else {
         return [
           ...prevCart,
-          { ...product, cartQuantity: 1, availableStock: product.quantity },
+          { ...product, quantity: 1, availableStock: product.quantity },
         ];
       }
     });
